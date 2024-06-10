@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body {
+            background-color: lightgrey;
+            padding: 20px;
+            text-align: center;
+        }
+        h1{
+            color: darkslategray;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prikaz Podataka</title>
+</head>
+<body>
+    <h1>Prikaz Podataka</h1>
+    <div id="dataDisplay"></div>
+
+    <script>
+        // Funkcija za dohvaćanje podataka iz LocalStorage-a
+        function fetchDataFromLocalStorage() {
+            const data = JSON.parse(localStorage.getItem('podaci'));
+            if (data) {
+                displayData(data);
+            } else {
+                console.log('Podaci nisu pronađeni u LocalStorage-u.');
+            }
+        }
+
+        // Funkcija za prikazivanje podataka na stranici
+        function displayData(data) {
+            const dataDisplay = document.getElementById('dataDisplay');
+            dataDisplay.innerHTML = `
+                <p>ID: ${data.id}</p>
+                <p>Naziv: ${data.naziv}</p>
+                <p>Količina: ${data.kolicina}</p>
+            `;
+        }
+
+        // Funkcija za ažuriranje podataka
+        function updateData() {
+            const id = prompt('Unesite novi ID:');
+            const naziv = prompt('Unesite novi naziv:');
+            const kolicina = prompt('Unesite novu količinu:');
+
+            // Pohrana ažuriranih podataka u LocalStorage
+            const updatedData = { id, naziv, kolicina };
+            localStorage.setItem('podaci', JSON.stringify(updatedData));
+
+            // Prikazivanje ažuriranih podataka na stranici
+            displayData(updatedData);
+        }
+
+        // Poziv funkcije za dohvaćanje podataka kada se stranica učita
+        window.onload = fetchDataFromLocalStorage;
+
+        // Poziv funkcije za ažuriranje podataka
+        updateData();
+    </script>
+</body>
+</html>
+

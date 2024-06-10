@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skladište Automobilske Robe</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: lightgrey;
+            padding: 20px;
+        }
+        h1{
+            color: darkslategray;
+        }
+        table {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skladište Automobilske Robe</h1>
+        <form id="addForm">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="number" class="form-control" id="id" required>
+            </div>
+            <div class="form-group">
+                <label for="naziv">Naziv:</label>
+                <input type="text" class="form-control" id="naziv" required>
+            </div>
+            <div class="form-group">
+                <label for="kolicina">Količina:</label>
+                <input type="number" class="form-control" id="kolicina" required>
+            </div>
+            <button type="submit" class="btn btn-primary" id="submitButton">Dodaj Artikl</button>
+        </form>
+        <!-- Gumb za brisanje podataka -->
+        <button onclick="deleteData()" class="btn btn-danger">Obriši Podatke</button>
+    </div>
+
+    <script>
+        const addForm = document.getElementById('addForm');
+        const submitButton = document.getElementById('submitButton');
+
+        addForm.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const id = document.getElementById('id').value;
+            const naziv = document.getElementById('naziv').value;
+            const kolicina = document.getElementById('kolicina').value;
+
+            // Kreiranje URL-a s parametrima
+            const url = `podaci.html?id=${id}&naziv=${naziv}&kolicina=${kolicina}`;
+
+            // Prijenos na podaci.html
+            window.location.href = url;
+        });
+
+        // Funkcija za brisanje podataka
+        function deleteData() {
+            // Očisti LocalStorage
+            localStorage.removeItem('podaci');
+            // Prikazi poruku o uspješnom brisanju
+            alert('Podaci uspješno obrisani!');
+        }
+    </script>
+    <div align="center">
+    <img src="skladiste.jpg"  height="250px" class="slika">
+    </div>
+</body>
+</html>
