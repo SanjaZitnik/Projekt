@@ -1,0 +1,11 @@
+body{
+    background-color: lightgray;
+    border: dashed 10px darkgray;
+}
+h1{
+color: darkslategray;
+}
+.slika{
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
